@@ -15,7 +15,7 @@ public class BankApplication {
 			System.out.println("--------------------------------------------");
 			System.out.print("선택> ");
 			
-			int selectNo = scanner.nextInt();
+			int selectNo = Integer.parseInt(scanner.nextLine());
 			
 			if(selectNo == 1) {
 				createAccount();
@@ -44,6 +44,7 @@ public class BankApplication {
 		int acBal = Integer.parseInt(scanner.nextLine());
 		for(int i=0;i<accountArray.length;i++) {
 			if(accountArray[i] == null) {
+				accountArray[i] = new Account(null,null,0);
 				accountArray[i].setAno(acNum);
 				accountArray[i].setOwner(acUser);
 				accountArray[i].setBalance(acBal);
@@ -58,7 +59,12 @@ public class BankApplication {
 		System.out.println("계좌목록");
 		System.out.println("--------");
 		for(int i=0;i<accountArray.length;i++) {
-			System.out.println(accountArray[i].getAno()+"\t"+accountArray[i].getOwner()+"\t"+accountArray[i].getBalance());
+			if(accountArray[i]==null) {
+				continue;
+			} else {
+				System.out.println(accountArray[i].getAno()+"\t"+accountArray[i].getOwner()+"\t"+accountArray[i].getBalance());
+
+			}
 		}
 	}
 	
@@ -70,18 +76,29 @@ public class BankApplication {
 		String acNum = scanner.nextLine();
 		System.out.print("예금액: ");
 		int acBal = Integer.parseInt(scanner.nextLine());
-		for(int i=0;i<accountArray.length;i++) {
-			if(accountArray[i].getAno().equals(acNum)) {
-				accountArray[i].setBalance(acBal+accountArray[i].getBalance());
-			}
-		}
+		findAccount(acNum).setBalance(acBal+findAccount(acNum).getBalance());
+		System.out.println("결과: 예금이 성공되었습니다.");
+		
 	}
 	
 	private static void withdraw() {
-		
+		System.out.println("--------");
+		System.out.println("예금");
+		System.out.println("--------");
+		System.out.print("계좌번호: ");
+		String acNum = scanner.nextLine();
+		System.out.print("출금액: ");
+		int acBal = Integer.parseInt(scanner.nextLine());
+		findAccount(acNum).setBalance(findAccount(acNum).getBalance()-acBal);
+		System.out.println("결과: 출금이 성공되었습니다.");		
 	}
 	
 	private static Account findAccount(String ano) {
-		
+		for(int i=0;i<accountArray.length;i++) {
+			if(accountArray[i].getAno().equals(ano)) {
+				return accountArray[i];
+			}
+		}
+		return null;
 	}
 }
