@@ -18,4 +18,5 @@ public class Example {
 	public static void method() throws NoAccountException {
 		throw new NoAccountException("0001: 입금 계좌가 없음");
 	}
+	
 }
