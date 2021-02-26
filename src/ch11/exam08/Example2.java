@@ -21,7 +21,7 @@ public class Example2 {
 		System.out.println(month);
 		System.out.println(date);
 		System.out.println(day);
-		System.out.println(amPm);
+		System.out.println(amPm);                                                                                                                                                                                                     
 		System.out.println(hour);
 		System.out.println(minute);
 		System.out.println(second);
